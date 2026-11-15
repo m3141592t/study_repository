@@ -15,7 +15,7 @@
 
 SELECT COUNT(*) AS number_of_users, 
 SUM(payer) AS number_of_payers, 
-ROUND(AVG(payer), 3) AS  payers_share
+ROUND(AVG(payer) * 100, 1) AS  persentage_payers
 FROM fantasy.users;
 
 -- 1.2. Доля платящих пользователей в разрезе расы персонажа:
@@ -23,11 +23,11 @@ FROM fantasy.users;
 SELECT race,
 SUM(payer) AS number_of_payers,
 COUNT(*) AS number_of_users,
-ROUND(AVG(payer), 3) AS payers_share
+ROUND(AVG(payer)* 100, 1) AS persentage_payers
 FROM fantasy.users
 JOIN fantasy.race USING(race_id)
 GROUP BY race
-ORDER BY payers_share;
+ORDER BY persentage_payers DESC;
 
 -- Задача 2. Исследование внутриигровых покупок
 -- 2.1. Статистические показатели по полю amount:
